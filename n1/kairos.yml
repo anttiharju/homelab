@@ -1,0 +1,42 @@
+#cloud-config
+
+users:
+- name: antti
+  passwd: $6$u4sOtpbdKw18KY3j$4cWsnRYJOIos3oCI/uKQQec5rYjGr5WOT8uWDdtHOltzW60X62/FIgk1uNZCQjQQ6FIcJo9VGdvZ/bu.ja2Yb/
+  groups:
+    - admin
+  ssh_authorized_keys:
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhaE+E9ldWoIMsDEyngzeJbIIf6VbTEeQ7xtP7NkjU2 antti@harju.io
+
+k3s:
+  enabled: true
+
+write_files:
+- path: /var/lib/rancher/k3s/server/manifests/nginx.yaml
+  permissions: "0644"
+  content: |
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: nginx
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: nginx-deployment
+      namespace: nginx
+    spec:
+      selector:
+        matchLabels:
+          app: nginx
+      replicas: 3
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:latest
+            ports:
+            - containerPort: 80
