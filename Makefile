@@ -1,6 +1,6 @@
-home:
+build:
 	kubectl kustomize k8s/cluster/kube-home1 -o k8s/kube-home1.yml
-.PHONY: home
+.PHONY: build
 
 download:
 	find k8s/base -name "download.bash" -type f -exec {} \;
