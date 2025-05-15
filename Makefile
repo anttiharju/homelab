@@ -7,5 +7,5 @@ validate:
 .PHONY: validate
 
 download:
-	find k8s/extension -name download.bash -exec {} \;
+	find k8s/extension -name download.bash -exec scripts/download.bash {} \;
 .PHONY: download
