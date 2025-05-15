@@ -3,5 +3,5 @@ build:
 .PHONY: build
 
 download:
-	find k8s/extension -name "download.bash" -type f -exec {} \;
+	find k8s/extension -name download.bash -type f -exec {} \;
 .PHONY: download
