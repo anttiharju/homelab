@@ -9,3 +9,13 @@ validate:
 download:
 	find k8s/extension -name download.bash -exec scripts/download.bash {} \;
 .PHONY: download
+
+diff:
+	kubectl config set-context kube-home1
+	kubectl diff -f k8s/kube-home1.yml
+.PHONY: deploy
+
+deploy:
+	kubectl config set-context kube-home1
+	kubectl apply -f k8s/kube-home1.yml
+.PHONY: deploy
