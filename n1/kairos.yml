@@ -11,7 +11,7 @@ users:
 k3s:
   enabled: true
   args:
-    - --tls-san=kube-home.harju.io 
+    - --tls-san=kube-home1.harju.io 
 
 write_files:
 - path: /var/lib/rancher/k3s/server/manifests/nginx.yaml
