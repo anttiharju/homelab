@@ -7,13 +7,13 @@ validate:
 .PHONY: validate
 
 download:
-	find k8s/base -name download.bash -exec scripts/download.bash {} \;
+	find k8s/base -name download.bash -exec {} \;
 .PHONY: download
 
 diff:
 	kubectl config set-context kube-home1
 	kubectl diff -f k8s/kube-home1-cluster.yml
-.PHONY: deploy
+.PHONY: diff
 
 deploy:
 	kubectl config set-context kube-home1
