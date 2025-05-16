@@ -1,5 +1,5 @@
 build:
-	kubectl kustomize k8s/cluster/kube-home1 -o k8s/kube-home1.yml
+	kubectl kustomize k8s/overlays/kube-home1 -o k8s/kube-home1-cluster.yml
 .PHONY: build
 
 validate:
@@ -7,15 +7,15 @@ validate:
 .PHONY: validate
 
 download:
-	find k8s/extension -name download.bash -exec scripts/download.bash {} \;
+	find k8s/base -name download.bash -exec scripts/download.bash {} \;
 .PHONY: download
 
 diff:
 	kubectl config set-context kube-home1
-	kubectl diff -f k8s/kube-home1.yml
+	kubectl diff -f k8s/kube-home1-cluster.yml
 .PHONY: deploy
 
 deploy:
 	kubectl config set-context kube-home1
-	kubectl apply -f k8s/kube-home1.yml
+	kubectl apply -f k8s/kube-home1-cluster.yml
 .PHONY: deploy
