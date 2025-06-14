@@ -10,4 +10,4 @@ To achieve operational excellence any solution relying on configuration at runti
 
 ## References
 
-[1] https://sre.google/sre-book/eliminating-toil/
+1. https://sre.google/sre-book/eliminating-toil/

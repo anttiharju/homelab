@@ -12,4 +12,4 @@
 
 ## References
 
-[1] https://www.flatcar.org/docs/latest/installing/bare-metal/booting-with-iso/#known-limitations
+1. https://www.flatcar.org/docs/latest/installing/bare-metal/booting-with-iso/#known-limitations
