@@ -7,6 +7,7 @@ To achieve operational excellence any solution relying on configuration at runti
 ## Technology stack
 
 1. [Flatcar Container Linux](https://www.flatcar.org)
+2. [Ansible](https://www.redhat.com/en/ansible-collaborative)
 
 ## References
 
