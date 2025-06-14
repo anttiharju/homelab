@@ -1,0 +1,50 @@
+name: "Detect changes"
+description: "Decide what steps need running based on changes"
+inputs:
+  changes:
+    description: "JSON array of changed files"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - id: action-validator
+      uses: anttiharju/actions/compare-changes@v0
+      with:
+        wildcard: action-validator
+        changes: ${{ inputs.changes }}
+    - id: actionlint
+      uses: anttiharju/actions/compare-changes@v0
+      with:
+        wildcard: actionlint
+        changes: ${{ inputs.changes }}
+    - id: mkdocs
+      uses: anttiharju/actions/compare-changes@v0
+      with:
+        wildcard: mkdocs
+        changes: ${{ inputs.changes }}
+    - id: prettier
+      uses: anttiharju/actions/compare-changes@v0
+      with:
+        wildcard: prettier
+        changes: ${{ inputs.changes }}
+    - id: shellcheck
+      uses: anttiharju/actions/compare-changes@v0
+      with:
+        wildcard: shellcheck
+        changes: ${{ inputs.changes }}
+outputs:
+  action-validator:
+    description: "Whether action-validator should run"
+    value: ${{ steps.action-validator.outputs.changed }}
+  actionlint:
+    description: "Whether actionlint should run"
+    value: ${{ steps.actionlint.outputs.changed }}
+  mkdocs:
+    description: "Whether MkDocs should run"
+    value: ${{ steps.mkdocs.outputs.changed }}
+  prettier:
+    description: "Whether Prettier should run"
+    value: ${{ steps.prettier.outputs.changed }}
+  shellcheck:
+    description: "Whether shellcheck should run"
+    value: ${{ steps.shellcheck.outputs.changed }}

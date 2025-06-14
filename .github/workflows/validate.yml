@@ -1,0 +1,52 @@
+name: Validate
+on:
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Find changes
+        id: changes
+        uses: anttiharju/actions/find-changes@v0
+
+      - name: Detect changes
+        id: changed
+        uses: ./.github/actions/detect-changes
+        with:
+          changes: ${{ steps.changes.outputs.array }}
+
+      - if: always()
+        name: action-validator
+        uses: anttiharju/actions/action-validator@v0
+
+      - if: always() && (steps.changed.outputs.actionlint == 'true' || github.event_name != 'pull_request')
+        name: actionlint
+        uses: anttiharju/actions/actionlint@v0
+
+      - if: always()
+        name: relcheck
+        uses: anttiharju/actions/relcheck@v0
+
+      - if: always()
+        name: EditorConfig-Checker
+        uses: anttiharju/actions/editorconfig-checker@v0
+
+      - if: always()
+        name: Keep .yml
+        uses: anttiharju/actions/keep-yml@v0
+
+      - if: always() && (steps.changed.outputs.mkdocs == 'true' || github.event_name != 'pull_request')
+        name: MkDocs
+        uses: anttiharju/actions/mkdocs-build-strict@v0
+
+      - if: always() && (steps.changed.outputs.prettier == 'true' || github.event_name != 'pull_request')
+        name: Prettier
+        uses: anttiharju/actions/prettier@v0
+        with:
+          patterns: "{*.yml,*.md}"
+
+      - if: always() && (steps.changed.outputs.shellcheck == 'true' || github.event_name != 'pull_request')
+        name: ShellCheck
+        uses: anttiharju/actions/shellcheck@v0
