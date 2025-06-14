@@ -1,1 +1,28 @@
-# https://raw.githubusercontent.com/flatcar/init/3d2f9c6d778b96b08ee7db661bb2af1a6a42679d/bin/flatcar-install
+---
+- name: Install Flatcar Container Linux
+  hosts: rescue
+  become: true
+  vars:
+    flatcar_script_url: "https://raw.githubusercontent.com/flatcar/init/3d2f9c6d778b96b08ee7db661bb2af1a6a42679d/bin/flatcar-install"
+    flatcar_script_path: "/tmp/flatcar-install"
+  tasks:
+    - name: Download Flatcar installation script
+      ansible.builtin.get_url:
+        url: "{{ flatcar_script_url }}"
+        dest: "{{ flatcar_script_path }}"
+        mode: "0755"
+      register: download_result
+
+    - name: Verify script was downloaded successfully
+      ansible.builtin.debug:
+        msg: "Downloaded Flatcar installation script to {{ flatcar_script_path }}"
+      when: download_result.changed
+#    - name: Execute Flatcar installation script with parameters
+#      ansible.builtin.command:
+#        cmd: "{{ flatcar_script_path }} -d /dev/nvme0n1 -i ignition.json"
+#      register: install_result
+#      changed_when: true
+#
+#    - name: Display installation result
+#      ansible.builtin.debug:
+#        var: install_result.stdout_lines
