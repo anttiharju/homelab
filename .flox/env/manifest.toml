@@ -35,7 +35,6 @@ PYTHON_DIR="$FLOX_ENV_CACHE/python313"
 on-activate = '''
   python_bin="$(realpath $(which python3))"
   if [ ! -d "$PYTHON_DIR" ]; then
-    python -m venv "$PYTHON_DIR"
     uv venv --python "$python_bin" "$PYTHON_DIR"
   fi
 
