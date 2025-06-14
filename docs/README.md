@@ -8,6 +8,7 @@ To achieve operational excellence any solution relying on configuration at runti
 
 1. [Flatcar Container Linux](https://www.flatcar.org)
 2. [Ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html)
+   - Supported by [Flox](https://flox.dev) to simplify Python setup.
 
 ## References
 
