@@ -4,7 +4,6 @@ on:
       - wildcard
     paths:
       - "**/*.sh"
-      - "**/*.bash"
 
 jobs:
   wildcard:
