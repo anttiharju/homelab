@@ -4,11 +4,13 @@ Setup ssh server on a live-bootable Alpine Linux Extended [\[1\]](https://alpine
 
 My notes on the usb stick creation process can be found in this [\[6\]](https://bsky.app/profile/anttiharju.dev/post/3lrlhtumqd22m) Bluesky post thread (@anttiharju.dev).
 
+To simplify (and better adhere to IaC) also install python3 so that the takeovers can be done via Ansible.
+
 ## References
 
-1. https://alpinelinux.org/downloads/  
-2. https://blog.haschek.at/2020/the-perfect-file-server.html  
-3. https://docs.hetzner.com/robot/dedicated-server/troubleshooting/hetzner-rescue-system/  
-4. https://kairos.io/docs/installation/takeover/  
-5. https://www.flatcar.org  
+1. https://alpinelinux.org/downloads/
+2. https://blog.haschek.at/2020/the-perfect-file-server.html
+3. https://docs.hetzner.com/robot/dedicated-server/troubleshooting/hetzner-rescue-system/
+4. https://kairos.io/docs/installation/takeover/
+5. https://www.flatcar.org
 6. https://bsky.app/profile/anttiharju.dev/post/3lrlhtumqd22m
