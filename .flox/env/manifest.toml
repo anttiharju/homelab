@@ -25,7 +25,7 @@ uv.pkg-path = "uv"
 ## -------------------------------------------------------------------
 [vars]
 PYTHON_DIR="$FLOX_ENV_CACHE/python313"
-# ANSIBLE_COLLECTIONS_PATH="$FLOX_ENV_PROJECT/collections"
+ANSIBLE_CONFIG="$FLOX_ENV_PROJECT/ansible/ansible.cfg"
 
 
 ## Activation Hook ---------------------------------------------------
@@ -34,8 +34,6 @@ PYTHON_DIR="$FLOX_ENV_CACHE/python313"
 [hook]
 on-activate = '''
   python_bin="$(realpath $(which python3))"
-  echo "$python_bin"
-  export ANSIBLE_PYTHON_INTERPRETER="$python_bin"
   if [ ! -d "$PYTHON_DIR" ]; then
     uv venv --python "$python_bin" "$PYTHON_DIR"
   fi
@@ -43,14 +41,6 @@ on-activate = '''
   (
     source "$PYTHON_DIR/bin/activate"
     uv pip install -r "$FLOX_ENV_PROJECT/ansible/requirements.txt" --quiet
-  #
-  #  collections="$FLOX_ENV_PROJECT/collections/requirements.yml"
-  #  sha_cache="$FLOX_ENV_CACHE/requirements.sha256"
-  #  sha_now=$(sha256sum "$collections" | cut -d' ' -f1)
-  #
-  #  if [ ! -f "$sha_cache" ] || [ "$(cat "$sha_cache")" != "$sha_now" ]; then
-  #    ansible-galaxy collection install -r "$collections" && echo "$sha_now" > "$sha_cache"
-  #  fi
   )
 '''
 
