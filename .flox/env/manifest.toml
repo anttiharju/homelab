@@ -40,7 +40,7 @@ on-activate = '''
 
   (
     source "$PYTHON_DIR/bin/activate"
-    uv pip install -r "$FLOX_ENV_PROJECT/requirements.txt" --quiet
+    uv pip install -r "$FLOX_ENV_PROJECT/ansible/requirements.txt" --quiet
   #
   #  collections="$FLOX_ENV_PROJECT/collections/requirements.yml"
   #  sha_cache="$FLOX_ENV_CACHE/requirements.sha256"
