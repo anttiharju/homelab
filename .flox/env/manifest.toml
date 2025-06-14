@@ -34,6 +34,8 @@ PYTHON_DIR="$FLOX_ENV_CACHE/python313"
 [hook]
 on-activate = '''
   python_bin="$(realpath $(which python3))"
+  echo "$python_bin"
+  export ANSIBLE_PYTHON_INTERPRETER="$python_bin"
   if [ ! -d "$PYTHON_DIR" ]; then
     uv venv --python "$python_bin" "$PYTHON_DIR"
   fi
