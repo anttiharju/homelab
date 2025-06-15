@@ -51,19 +51,15 @@ on-activate = '''
 ## -------------------------------------------------------------------
 [profile]
 bash = '''
-  echo "Activating python virtual environment" >&2
   source "$PYTHON_DIR/bin/activate"
 '''
 fish = '''
-  echo "Activating python virtual environment" >&2
   source "$PYTHON_DIR/bin/activate.fish"
 '''
 tcsh = '''
-  echo "Activating python virtual environment" >&2
   source "$PYTHON_DIR/bin/activate.csh"
 '''
 zsh = '''
-  echo "Activating python virtual environment" >&2
   source "$PYTHON_DIR/bin/activate"
 '''
 

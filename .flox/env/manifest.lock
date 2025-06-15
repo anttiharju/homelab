@@ -19,10 +19,10 @@
       "on-activate": "  python_bin=\"$(realpath $(which python3))\"\n  if [ ! -d \"$PYTHON_DIR\" ]; then\n    uv venv --python \"$python_bin\" \"$PYTHON_DIR\"\n  fi\n\n  (\n    source \"$PYTHON_DIR/bin/activate\"\n    uv pip install -r \"$FLOX_ENV_PROJECT/ansible/requirements.txt\" --quiet\n  )\n"
     },
     "profile": {
-      "bash": "  echo \"Activating python virtual environment\" >&2\n  source \"$PYTHON_DIR/bin/activate\"\n",
-      "zsh": "  echo \"Activating python virtual environment\" >&2\n  source \"$PYTHON_DIR/bin/activate\"\n",
-      "fish": "  echo \"Activating python virtual environment\" >&2\n  source \"$PYTHON_DIR/bin/activate.fish\"\n",
-      "tcsh": "  echo \"Activating python virtual environment\" >&2\n  source \"$PYTHON_DIR/bin/activate.csh\"\n"
+      "bash": "  source \"$PYTHON_DIR/bin/activate\"\n",
+      "zsh": "  source \"$PYTHON_DIR/bin/activate\"\n",
+      "fish": "  source \"$PYTHON_DIR/bin/activate.fish\"\n",
+      "tcsh": "  source \"$PYTHON_DIR/bin/activate.csh\"\n"
     },
     "options": {
       "systems": [
