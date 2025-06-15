@@ -91,3 +91,8 @@
 #    - name: Display installation result
 #      ansible.builtin.debug:
 #        var: install_result.stdout_lines
+# notes for later, ignore for now:
+# apk add efibootmgr
+# efibootmgr -v
+# efibootmgr -n X
+# reboot now
