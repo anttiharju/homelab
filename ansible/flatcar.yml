@@ -82,13 +82,12 @@
         dest: "{{ temp_dir.path }}/flatcar-install"
         mode: "0755"
       register: flatcar_script
-
-    - name: Run flatcar-install script with the largest disk
-      ansible.builtin.command:
-        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -i ignition.json"
-        chdir: "{{ temp_dir.path }}"
-      register: install_result
-
-    - name: Display installation result
-      ansible.builtin.debug:
-        var: install_result.stdout_lines
+#    - name: Run flatcar-install script with the largest disk
+#      ansible.builtin.command:
+#        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -i ignition.json"
+#        chdir: "{{ temp_dir.path }}"
+#      register: install_result
+#
+#    - name: Display installation result
+#      ansible.builtin.debug:
+#        var: install_result.stdout_lines
