@@ -15,7 +15,9 @@
 
     - name: Generate ignition file with Butane
       ansible.builtin.shell:
-        cmd: "docker run --rm -i quay.io/coreos/butane:latest < ../flatcar/butane/{{ target_host }}.yml > ../flatcar/ignition/{{ target_host }}.json"
+        cmd: |
+          "docker run --rm -i quay.io/coreos/butane:latest < ../flatcar/butane/{{ target_host }}.yml > ../flatcar/ignition/{{ target_host }}.json"
+          npx prettier --write ../flatcar/ignition/{{ target_host }}.json
       args:
         chdir: "{{ playbook_dir }}"
       delegate_to: localhost
@@ -127,6 +129,26 @@
       community.general.apk:
         name: efibootmgr
         state: present
+
+    - name: Get current EFI boot entries
+      ansible.builtin.command:
+        cmd: "efibootmgr -v"
+      register: efi_boot_entries
+      changed_when: false
+
+    - name: Display current EFI boot entries
+      ansible.builtin.debug:
+        var: efi_boot_entries.stdout_lines
+
+    - name: Parse and delete all existing boot entries
+      ansible.builtin.shell:
+        cmd: |
+          for bootnum in $(efibootmgr | grep -o "Boot[0-9][0-9][0-9][0-9]" | cut -c5-8); do
+            efibootmgr -b $bootnum -B
+          done
+      register: delete_boot_entries
+      changed_when: delete_boot_entries.stdout != ""
+      failed_when: false # Don't fail if there are no entries to delete
 
     - name: Copy EFI partition finder script
       ansible.builtin.copy:
