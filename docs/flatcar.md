@@ -7,6 +7,14 @@ Flatcar Container Linux [1] is being pursued to.
 3. It's a CNCF project unlike Fedora CoreOS
    - Even though it is an incubating project, it's a direct fork of CoreOS from days of yore, even if Fedora's naming would suggest otherwise.
 
+## Configuration
+
+Read https://www.flatcar.org/docs/latest/provisioning/config-transpiler/
+
+```sh
+docker run --rm -i quay.io/coreos/butane:latest < flatcar/butane/n1.yml > flatcar/ignition/n1.json
+```
+
 ## References
 
 1. https://www.flatcar.org

@@ -1,0 +1,7 @@
+variant: flatcar
+version: 1.0.0
+passwd:
+  users:
+    - name: antti
+      ssh_authorized_keys:
+        - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhaE+E9ldWoIMsDEyngzeJbIIf6VbTEeQ7xtP7NkjU2
