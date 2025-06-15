@@ -4,9 +4,16 @@ Setup ssh server on a live-bootable Alpine Linux Extended [\[1\]](https://alpine
 
 My notes on the usb stick creation process can be found in this [\[6\]](https://bsky.app/profile/anttiharju.dev/post/3lrlhtumqd22m) Bluesky post thread (@anttiharju.dev).
 
-To simplify (and better adhere to IaC) also install python3 so that the takeovers can be done via Ansible.
+## Ansible compatibility
 
-Also passwordless sudo (not just the default `su -`) simplifies ansible playbooks
+- `apk add python3` # to be able to use ansible at all
+- `apk add doas` # become method
+
+## How to persist changes
+
+```sh
+lbu commit -d
+```
 
 ## References
 
