@@ -29,7 +29,7 @@ pre-commit:
       run: mkdocs build --strict
 
     - name: Prettier
-      glob: "{*.yml,*.md}"
+      glob: "{*.yml,*.md,*.json}"
       run: prettier --write {staged_files}
       stage_fixed: true
 
