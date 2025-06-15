@@ -20,3 +20,17 @@
           - gpg
           - gawk
         state: present
+
+    - name: Find largest disk
+      set_fact:
+        largest_disk: >-
+          {{ ansible_devices | dict2items |
+            selectattr('value.sectors', 'defined') |
+            rejectattr('value.sectors', 'equalto', '0') |
+            rejectattr('key', 'match', '^(loop|ram).*') |
+            sort(attribute='value.sectors', reverse=true) |
+            first }}
+
+    - name: Display largest disk
+      debug:
+        msg: "Largest disk found is /dev/{{ largest_disk.key }} with size {{ largest_disk.value.size }}"
