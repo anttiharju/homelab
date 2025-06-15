@@ -70,10 +70,6 @@
             sort(attribute='value.sectors', reverse=true) |
             first }}
 
-    - name: Display largest disk
-      ansible.builtin.debug:
-        msg: "Largest disk found is /dev/{{ largest_disk.key }} with size {{ largest_disk.value.size }}"
-
     - name: Create a temporary directory
       ansible.builtin.tempfile:
         state: directory
@@ -86,3 +82,13 @@
         dest: "{{ temp_dir.path }}/flatcar-install"
         mode: "0755"
       register: flatcar_script
+
+    - name: Run flatcar-install script with the largest disk
+      ansible.builtin.command:
+        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -i ignition.json"
+        chdir: "{{ temp_dir.path }}"
+      register: install_result
+
+    - name: Display installation result
+      ansible.builtin.debug:
+        var: install_result.stdout_lines
