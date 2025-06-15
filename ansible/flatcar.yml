@@ -16,8 +16,8 @@
     - name: Generate ignition file with Butane
       ansible.builtin.shell:
         cmd: |
-          "docker run --rm -i quay.io/coreos/butane:latest < ../flatcar/butane/{{ target_host }}.yml > ../flatcar/ignition/{{ target_host }}.json"
-          npx prettier --write ../flatcar/ignition/{{ target_host }}.json
+          docker run --rm -i quay.io/coreos/butane:latest < ../flatcar/butane/{{ target_host }}.yml > ../flatcar/ignition/{{ target_host }}.json
+          prettier --write ../flatcar/ignition/{{ target_host }}.json
       args:
         chdir: "{{ playbook_dir }}"
       delegate_to: localhost
