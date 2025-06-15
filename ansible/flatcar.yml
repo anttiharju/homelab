@@ -139,11 +139,9 @@
 
     - name: Display pre-reboot message
       ansible.builtin.debug:
-        msg: |
-          Installation complete! The system will now reboot into Flatcar Container Linux.
-
-          IMPORTANT: After verifying that Flatcar boots correctly, unplug the rescue USB drive
-          before any subsequent reboots to ensure the system continues to boot from Flatcar Linux.
+        msg: >-
+          Installation complete! Rebooting into Flatcar Container Linux.
+          IMPORTANT: Unplug the rescue USB drive to ensure reboot does not reactive the rescue system.
 
     - name: Reboot the system
       ansible.builtin.command:
