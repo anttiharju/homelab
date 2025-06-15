@@ -6,6 +6,8 @@ My notes on the usb stick creation process can be found in this [\[6\]](https://
 
 To simplify (and better adhere to IaC) also install python3 so that the takeovers can be done via Ansible.
 
+Also passwordless sudo (not just the default `su -`) simplifies ansible playbooks
+
 ## References
 
 1. https://alpinelinux.org/downloads/
