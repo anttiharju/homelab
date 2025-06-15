@@ -82,6 +82,12 @@
         dest: "{{ temp_dir.path }}/flatcar-install"
         mode: "0755"
       register: flatcar_script
+
+    - name: Copy ignition file to remote system
+      ansible.builtin.copy:
+        src: "../flatcar/ignition/n1.json"
+        dest: "{{ temp_dir.path }}/ignition.json"
+        mode: "0644"
 #    - name: Run flatcar-install script with the largest disk
 #      ansible.builtin.command:
 #        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -C stable -i ignition.json"
