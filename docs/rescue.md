@@ -9,9 +9,20 @@ My notes on the usb stick creation process can be found in this [\[6\]](https://
 - `apk add python3` # to be able to use ansible at all
 - `apk add doas` # become method
 
+### Passwordless become method
+
+Just to simplify running playbooks with become (required for doing `apk add` for dependencies). One still cannot ssh in without a private key or a password.
+
+```sh
+mkdir -p /etc/doas.d
+echo "permit nopass YOUR_USERNAME as root" > /etc/doas.d/passwordless.conf
+chmod 600 /etc/doas.d/passwordless.conf
+```
+
 ## How to persist changes
 
 ```sh
+su -
 lbu commit -d
 ```
 

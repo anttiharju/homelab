@@ -1,6 +1,7 @@
 ---
 - name: Install Flatcar Container Linux
   hosts: rescue
+  become: true
   vars:
     flatcar_script_url: "https://raw.githubusercontent.com/flatcar/init/3d2f9c6d778b96b08ee7db661bb2af1a6a42679d/bin/flatcar-install"
     flatcar_script_path: "/tmp/flatcar-install"
