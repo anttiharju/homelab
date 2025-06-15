@@ -101,8 +101,39 @@
     - name: Display installation result
       ansible.builtin.debug:
         var: install_result.stdout_lines
-# notes for later, ignore for now:
-# apk add efibootmgr
-# efibootmgr -v
-# efibootmgr -n X
-# reboot now
+
+    - name: Install efibootmgr
+      community.general.apk:
+        name: efibootmgr
+        state: present
+
+    - name: Find EFI partition on installed system
+      ansible.builtin.shell: |
+        lsblk -no NAME,PARTLABEL /dev/{{ largest_disk.key }}* | grep -i EFI | head -1 | awk '{print $1}'
+      register: efi_part
+      changed_when: false
+
+    - name: Create UEFI boot entry for Flatcar
+      ansible.builtin.shell: |
+        # Extract partition number
+        PART_NUM=$(echo {{ efi_part.stdout }} | grep -o '[0-9]*$')
+        # Create boot entry and capture the boot number in one step
+        BOOT_ENTRY=$(efibootmgr -c -d /dev/{{ largest_disk.key }} -p $PART_NUM -l '\EFI\BOOT\bootx64.efi' -L 'Flatcar Linux' | grep "Flatcar Linux" | awk '{print $1}' | sed 's/Boot//' | sed 's/\*//')
+        # Set as next boot
+        efibootmgr -n $BOOT_ENTRY
+      register: boot_setup
+      changed_when: true
+
+    - name: Display pre-reboot message
+      ansible.builtin.debug:
+        msg: |
+          Installation complete! The system will now reboot into Flatcar Container Linux.
+
+          IMPORTANT: After verifying that Flatcar boots correctly, unplug the rescue USB drive
+          before any subsequent reboots to ensure the system continues to boot from Flatcar Linux.
+
+    - name: Reboot the system
+      ansible.builtin.command:
+        cmd: "reboot now"
+      async: 1
+      poll: 0
