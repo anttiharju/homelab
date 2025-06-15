@@ -3,10 +3,17 @@ version: 1.0.0
 passwd:
   users:
     - name: antti
+      password_hash: "$6$rounds=4096$FX4jOFuHeSXyh3A8$2Nm0CHXDU3PDunRUtteN4MF9MS7Klfi1x4Btn1DrEi1qRzQC0agJme3wh0huPQ52/OPxr4rAEXNlDtMbrBGKC/"
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhaE+E9ldWoIMsDEyngzeJbIIf6VbTEeQ7xtP7NkjU2
+      groups: sudo
 storage:
   links:
-    - path: /etc/extensions/docker-flatcar.raw
+    - overwrite: true
+      path: /etc/extensions/docker-flatcar.raw
       target: /dev/null # both docker and containerd are installed by default, this disables docker
-      overwrite: true
+  files:
+    - overwrite: true
+      path: /etc/hostname
+      contents:
+        inline: n2.harju.io
