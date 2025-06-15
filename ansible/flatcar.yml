@@ -25,7 +25,7 @@
             mode: "0644"
           check_mode: false
 
-        - name: Download flatcar-install from SHA version
+        - name: Download flatcar-install from SHA
           ansible.builtin.get_url:
             url: "{{ flatcar_url_base }}{{ flatcar_url_sha }}{{ flatcar_url_path }}"
             dest: "{{ compare_dir.path }}/flatcar-install"
@@ -56,7 +56,6 @@
           - bzip2
           - util-linux
           - wget
-          - grep
           - coreutils
           - eudev
           - gnupg
