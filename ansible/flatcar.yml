@@ -88,15 +88,16 @@
         src: "../flatcar/ignition/n1.json"
         dest: "{{ temp_dir.path }}/ignition.json"
         mode: "0644"
-#    - name: Run flatcar-install script with the largest disk
-#      ansible.builtin.command:
-#        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -C stable -i ignition.json"
-#        chdir: "{{ temp_dir.path }}"
-#      register: install_result
-#
-#    - name: Display installation result
-#      ansible.builtin.debug:
-#        var: install_result.stdout_lines
+
+    - name: Run flatcar-install script with the largest disk
+      ansible.builtin.command:
+        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -C stable -i ignition.json"
+        chdir: "{{ temp_dir.path }}"
+      register: install_result
+
+    - name: Display installation result
+      ansible.builtin.debug:
+        var: install_result.stdout_lines
 # notes for later, ignore for now:
 # apk add efibootmgr
 # efibootmgr -v
