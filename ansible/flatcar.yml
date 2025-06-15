@@ -54,10 +54,15 @@
         name:
           - bash
           - bzip2
-          - lsblk
+          - util-linux
+          - wget
+          - grep
+          - coreutils
           - eudev
-          - gpg
+          - gnupg
           - gawk
+          - btrfs-progs-extra
+          - wipefs
         state: present
 
     - name: Find largest disk
@@ -91,8 +96,7 @@
 
     - name: Run flatcar-install script with the largest disk
       ansible.builtin.command:
-        cmd: "{{ temp_dir.path }}/flatcar-install -d /dev/{{ largest_disk.key }} -C stable -i ignition.json"
-        chdir: "{{ temp_dir.path }}"
+        cmd: "{{ temp_dir.path }}/flatcar-install -v -d /dev/{{ largest_disk.key }} -C stable -i {{ temp_dir.path }}/ignition.json"
       register: install_result
 
     - name: Display installation result
