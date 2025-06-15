@@ -3,8 +3,36 @@
   hosts: rescue
   become: true
   vars:
-    flatcar_script_url: "https://raw.githubusercontent.com/flatcar/init/3d2f9c6d778b96b08ee7db661bb2af1a6a42679d/bin/flatcar-install"
-    flatcar_script_path: "/tmp/flatcar-install"
+    flatcar_url_base: "https://raw.githubusercontent.com/flatcar/init/"
+    flatcar_url_sha: "3d2f9c6d778b96b08ee7db661bb2af1a6a42679d"
+    flatcar_url_path: "/bin/flatcar-install"
+    flatcar_tmp: "/tmp/flatcar-install"
+  pre_tasks:
+    - name: Check if HEAD script matches SHA-locked version
+      delegate_to: localhost
+      become: false
+      ignore_errors: true
+      block:
+        - name: Get flatcar-install via SHA
+          ansible.builtin.uri:
+            url: "{{ flatcar_url_base }}{{ flatcar_url_sha }}{{ flatcar_url_path }}"
+            return_content: true
+          register: sha_locked_script
+          check_mode: false
+
+        - name: Get flatcar-install via HEAD
+          ansible.builtin.uri:
+            url: "{{ flatcar_url_base }}HEAD{{ flatcar_url_path }}"
+            return_content: true
+          register: head_script
+          check_mode: false
+
+        - name: Compare SHA and HEAD scripts
+          ansible.builtin.assert:
+            that:
+              - sha_locked_script.content == head_script.content
+            fail_msg: "Warning: SHA is not up-to-date with HEAD version. Please review changes and update the SHA in the playbook."
+            success_msg: "SHA-locked flatcar-install matches HEAD"
   tasks:
     - name: Update package repositories
       community.general.apk:
