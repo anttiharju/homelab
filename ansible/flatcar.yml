@@ -93,6 +93,11 @@
         dest: "{{ temp_dir.path }}/ignition.json"
         mode: "0644"
 
+    - name: Wipe disk before installation
+      ansible.builtin.command:
+        cmd: "wipefs -a /dev/{{ largest_disk.key }}"
+      changed_when: true
+
     - name: Run flatcar-install script with the largest disk
       ansible.builtin.command:
         cmd: "{{ temp_dir.path }}/flatcar-install -v -d /dev/{{ largest_disk.key }} -C stable -i {{ temp_dir.path }}/ignition.json"
