@@ -5,3 +5,8 @@ passwd:
     - name: antti
       ssh_authorized_keys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhaE+E9ldWoIMsDEyngzeJbIIf6VbTEeQ7xtP7NkjU2
+storage:
+  links:
+    - path: /etc/extensions/docker-flatcar.raw
+      target: /dev/null # both docker and containerd are installed by default, this disables docker
+      overwrite: true

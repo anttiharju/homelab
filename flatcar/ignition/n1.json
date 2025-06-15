@@ -1,1 +1,1 @@
-{"ignition":{"version":"3.3.0"},"passwd":{"users":[{"name":"core","sshAuthorizedKeys":["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhaE+E9ldWoIMsDEyngzeJbIIf6VbTEeQ7xtP7NkjU2"]}]}}
+{"ignition":{"version":"3.3.0"},"passwd":{"users":[{"name":"antti","sshAuthorizedKeys":["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhaE+E9ldWoIMsDEyngzeJbIIf6VbTEeQ7xtP7NkjU2"]}]},"storage":{"links":[{"overwrite":true,"path":"/etc/extensions/docker-flatcar.raw","target":"/dev/null"}]}}
