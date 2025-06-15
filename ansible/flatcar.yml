@@ -6,7 +6,6 @@
     flatcar_url_base: "https://raw.githubusercontent.com/flatcar/init/"
     flatcar_url_sha: "3d2f9c6d778b96b08ee7db661bb2af1a6a42679d"
     flatcar_url_path: "/bin/flatcar-install"
-    flatcar_tmp: "/tmp/flatcar-install"
   pre_tasks:
     - name: Check if HEAD script matches SHA-locked version
       delegate_to: localhost
@@ -62,3 +61,13 @@
     - name: Display largest disk
       debug:
         msg: "Largest disk found is /dev/{{ largest_disk.key }} with size {{ largest_disk.value.size }}"
+
+    - name: Create a temporary directory
+      ansible.builtin.tempfile:
+        state: directory
+        suffix: flatcar-install
+      register: temp_dir
+
+    - name: Use the temporary directory
+      debug:
+        msg: "Temporary directory: {{ temp_dir.path }}"
