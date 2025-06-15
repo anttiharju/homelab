@@ -14,11 +14,10 @@
       run_once: true
 
     - name: Generate ignition file with Butane
-      ansible.builtin.command:
+      ansible.builtin.shell:
         cmd: "docker run --rm -i quay.io/coreos/butane:latest < ../flatcar/butane/{{ target_host }}.yml > ../flatcar/ignition/{{ target_host }}.json"
       args:
         chdir: "{{ playbook_dir }}"
-        creates: "../flatcar/ignition/{{ target_host }}.json"
       delegate_to: localhost
       become: false
       run_once: true
