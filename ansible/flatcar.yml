@@ -7,6 +7,22 @@
     flatcar_url_sha: "3d2f9c6d778b96b08ee7db661bb2af1a6a42679d" # dcf668ed485a9fd278273eb3214449bff3a4a83a
     flatcar_url_path: "/bin/flatcar-install"
   pre_tasks:
+    - name: Get target host name from inventory
+      ansible.builtin.set_fact:
+        target_host: "{{ inventory_hostname }}"
+      delegate_to: localhost
+      run_once: true
+
+    - name: Generate ignition file with Butane
+      ansible.builtin.command:
+        cmd: "docker run --rm -i quay.io/coreos/butane:latest < ../flatcar/butane/{{ target_host }}.yml > ../flatcar/ignition/{{ target_host }}.json"
+      args:
+        chdir: "{{ playbook_dir }}"
+        creates: "../flatcar/ignition/{{ target_host }}.json"
+      delegate_to: localhost
+      become: false
+      run_once: true
+
     - name: Check if HEAD script matches SHA-locked version
       delegate_to: localhost
       become: false
@@ -89,7 +105,7 @@
 
     - name: Copy ignition file to remote system
       ansible.builtin.copy:
-        src: "../flatcar/ignition/n1.json"
+        src: "../flatcar/ignition/{{ target_host }}.json"
         dest: "{{ temp_dir.path }}/ignition.json"
         mode: "0644"
 

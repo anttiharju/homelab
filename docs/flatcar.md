@@ -15,6 +15,13 @@ Read https://www.flatcar.org/docs/latest/provisioning/config-transpiler/
 docker run --rm -i quay.io/coreos/butane:latest < flatcar/butane/n1.yml > flatcar/ignition/n1.json
 ```
 
+## Provisioning
+
+1. Boot server into rescue mode.
+2. Run `ansible-playbook ansible/flatcar.yml --limit n2`
+3. Server will automatically reboot into Flatcar Container Linux.
+4. Unplug the rescue system usb drive to ensure subsequent reboots boot into Flatcar Container Linux.
+
 ## References
 
 1. https://www.flatcar.org
