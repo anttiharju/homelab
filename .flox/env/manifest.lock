@@ -16,7 +16,7 @@
       "VIRTUAL_ENV_DISABLE_PROMPT": "1"
     },
     "hook": {
-      "on-activate": "  python_bin=\"$(realpath $(which python3))\"\n  if [ ! -d \"$PYTHON_DIR\" ]; then\n    uv venv --python \"$python_bin\" \"$PYTHON_DIR\"\n  fi\n\n  (\n    source \"$PYTHON_DIR/bin/activate\"\n    uv pip install -r \"$FLOX_ENV_PROJECT/ansible/requirements.txt\" --quiet\n\n    collections=\"$FLOX_ENV_PROJECT/ansible/collections/galaxy.yml\"\n    sha_cache=\"$FLOX_ENV_CACHE/collections.sha256\"\n    sha_now=$(sha256sum \"$collections\" | cut -d' ' -f1)\n    if [[ ! -f \"$sha_cache\" ]] || [[ \"$(cat \"$sha_cache\")\" != \"$sha_now\" ]]; then\n      ansible-galaxy collection install -r \"$collections\" && echo \"$sha_now\" > \"$sha_cache\"\n    fi\n  )\n"
+      "on-activate": "  python_bin=\"$(realpath $(which python3))\"\n  if [ ! -d \"$PYTHON_DIR\" ]; then\n    uv venv --python \"$python_bin\" \"$PYTHON_DIR\"\n  fi\n\n  (\n    source \"$PYTHON_DIR/bin/activate\"\n    uv pip install -r \"$FLOX_ENV_PROJECT/ansible/requirements.txt\" --quiet\n  )\n"
     },
     "profile": {
       "bash": "  source \"$PYTHON_DIR/bin/activate\"\n",
