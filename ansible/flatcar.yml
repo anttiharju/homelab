@@ -68,6 +68,9 @@
         suffix: flatcar-install
       register: temp_dir
 
-    - name: Use the temporary directory
-      debug:
-        msg: "Temporary directory: {{ temp_dir.path }}"
+    - name: Download the SHA-locked flatcar-install script to the temporary directory
+      ansible.builtin.get_url:
+        url: "{{ flatcar_url_base }}{{ flatcar_url_sha }}{{ flatcar_url_path }}"
+        dest: "{{ temp_dir.path }}/flatcar-install"
+        mode: "0755"
+      register: flatcar_script
