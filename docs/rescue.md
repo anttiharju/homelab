@@ -19,6 +19,12 @@ echo "permit nopass YOUR_USERNAME as root" > /etc/doas.d/passwordless.conf
 chmod 600 /etc/doas.d/passwordless.conf
 ```
 
+## How to connect
+
+```sh
+ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" HOSTNAME
+```
+
 ## How to persist changes
 
 ```sh
