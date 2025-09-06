@@ -1,0 +1,9 @@
+---
+- name: Deploy dnsmasq configuration
+  copy:
+    src: dnsmasq.conf
+    dest: /etc/dnsmasq.conf
+    owner: root
+    group: root
+    mode: "0600"
+  notify: Restart dnsmasq

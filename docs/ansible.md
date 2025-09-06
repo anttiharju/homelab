@@ -7,7 +7,14 @@ The setup here is very basic and is only meant for:
 
 ## SSH config
 
-Managed outside the repository, the setup here is small so for now this is how it is.
+Import at the bottom of `~/.ssh/config`:
+
+```
+Host *
+  IdentityFile ~/.ssh/keys/homelab-auth
+  UserKnownHostsFile ~/anttiharju/homelab/ansible/files/ssh/known_hosts
+Include ~/anttiharju/homelab/ansible/files/ssh/config
+```
 
 ## Commands
 

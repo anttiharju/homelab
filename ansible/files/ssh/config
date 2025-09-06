@@ -1,0 +1,16 @@
+Host *
+  IdentityFile ~/.ssh/keys/homelab-auth
+  UserKnownHostsFile ./files/ssh/known_hosts
+
+Host n1
+  HostName 192.168.50.11
+
+Host n2
+  HostName 192.168.50.12
+
+Host n3
+  HostName 192.168.50.13
+
+Host f3
+  HostName 192.168.8.1
+  User root
