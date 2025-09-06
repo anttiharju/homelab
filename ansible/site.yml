@@ -1,0 +1,4 @@
+---
+- name: Include dnsmasq playbook for hosts in the dnsmasq group
+  import_playbook: dnsmasq.yml
+  when: inventory_hostname in groups['dnsmasq']
