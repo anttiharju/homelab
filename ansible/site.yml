@@ -2,5 +2,6 @@
 - name: Configure DNS
   hosts: dnsmasq
   become: true
+  gather_facts: false
   roles:
     - dnsmasq
