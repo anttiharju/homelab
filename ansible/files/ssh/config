@@ -1,6 +1,8 @@
 Host *
   IdentityFile ~/.ssh/keys/homelab-auth
   UserKnownHostsFile files/ssh/known_hosts
+  ControlMaster auto
+  ControlPersist 60s
 
 Host n1
   HostName 192.168.50.11
