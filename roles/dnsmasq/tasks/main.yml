@@ -1,6 +1,6 @@
 ---
 - name: Deploy configuration
-  copy:
+  ansible.builtin.copy:
     src: dnsmasq.conf
     dest: /etc/dnsmasq.conf
     owner: root
