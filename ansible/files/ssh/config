@@ -1,6 +1,6 @@
 Host *
   IdentityFile ~/.ssh/keys/homelab-auth
-  UserKnownHostsFile ./ansible/files/ssh/known_hosts
+  UserKnownHostsFile files/ssh/known_hosts
 
 Host n1
   HostName 192.168.50.11
