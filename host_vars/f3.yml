@@ -1,3 +1,2 @@
-# Flint 3 shell access is busybox-based so with these settings we avoid confusing warnings
-ansible_connection: ssh
+# This helps to avoid warnings on the busybox based Flint 3 shell access
 ansible_ssh_transfer_method: piped
