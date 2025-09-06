@@ -1,5 +1,5 @@
 ---
-- name: Deploy dnsmasq configuration
+- name: Deploy configuration
   copy:
     src: dnsmasq.conf
     dest: /etc/dnsmasq.conf
