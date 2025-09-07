@@ -1,5 +1,5 @@
 ---
-- name: Deploy configuration
+- name: Deploy dnsmasq configuration
   ansible.builtin.copy:
     src: files/dnsmasq.conf
     dest: /etc/dnsmasq.conf
