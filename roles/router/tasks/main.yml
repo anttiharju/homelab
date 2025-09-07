@@ -3,10 +3,10 @@
   ansible.builtin.raw: opkg update
   changed_when: true
 
-- name: Install python3-light package
-  ansible.builtin.raw: opkg install python3-light
+- name: Install python3 package
+  ansible.builtin.raw: opkg install python3
   register: router_python3_install
-  changed_when: "'Installing python3-light' in router_python3_install.stdout"
+  changed_when: "'Installing python3' in router_python3_install.stdout"
 
 - name: Deploy dnsmasq configuration
   ansible.builtin.copy:
