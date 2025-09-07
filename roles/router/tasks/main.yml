@@ -1,10 +1,6 @@
 ---
-- name: Update package lists with opkg
-  ansible.builtin.raw: opkg update
-  changed_when: true
-
 - name: Install python3 package
-  ansible.builtin.raw: opkg install python3
+  ansible.builtin.raw: opkg update && opkg install python3
   register: router_python3_install
   changed_when: "'Installing python3' in router_python3_install.stdout"
 
