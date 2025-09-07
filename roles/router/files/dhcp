@@ -1,0 +1,14 @@
+config host
+        option name 'n1'
+        option ip '192.168.8.101'
+        option mac 'E0:51:D8:17:4E:58'
+
+config host
+        option name 'n2'
+        option ip '192.168.8.102'
+        option mac 'E0:51:D8:1A:9B:22'
+
+config host
+        option name 'n3'
+        option ip '192.168.8.103'
+        option mac 'E0:51:D8:15:9A:F9'
