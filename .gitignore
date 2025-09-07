@@ -1,5 +1,4 @@
-site
 .ansible
 .vscode/settings.json
 iso
-roles/router/files/tftp
+site
